@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "utf-8">
+    <meta name = "description" content = "">
+    <title>Final Project</title>
+</head>
+<body>
+    <style>
+
+        body{
+            display: flex;
+            flex-direction: row;
+        }
+        .d3-tip {
+            line-height: 1;
+            padding: 6px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .doodle{
+            position: relative;
+            top: 0px; left: 0; bottom: 0; right: 0; 
+            z-index: 1; 
+        }
+
+        .doodle::after { 
+            position: absolute;
+            content: "";
+            top: 0px; left: 0; bottom: 0; right: 0; 
+            backdrop-filter: blur(200px); 
+            z-index: 1; 
+        } 
+
+
+        #result{
+            position:absolute;
+            top: 0px; left: 1500px;
+            width: 800px;
+            height:1300px;
+            z-index: 4; 
+        }
+
+        #Chart {
+            position: absolute;
+            top: 20px;
+            display: flex;
+            transform: translate(0%, 0%);
+            flex-direction: column;
+            z-index: 3; 
+        }
+
+        .btn {
+            align-self: flex-end ;
+            top: 1250px; right:300px;
+        }
+        .btn,
+        .btn:hover,
+        .btn:focus {
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            width: 80px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: #c4e49f;
+            color: #1a1a1a;
+            font-size: 1rem;
+            transition: box-shadow 400ms cubic-bezier(0.2, 0, 0.7, 1), transform 200ms cubic-bezier(0.2, 0, 0.7, 1);
+        }
+        .btn:hover {
+            transform: rotate(45deg);
+            box-shadow: 0 0 1px 15px rgba(98, 169, 114, 0.4), 0 0 1px 30px rgba(186, 255, 199, 0.1), 0 0 1px 45px rgba(60, 138, 59, 0.1);
+        }
+    </style>
+    <div class="doodle">
+        <css-doodle> 
+            :doodle { 
+                @grid: 1x50 / 100vmax; 
+                @size: 100vw 100vh;
+            } 
+            @place-cell: center; 
+            
+            width: @rand(20vmin, 50vmin); 
+            height: @rand(30vmin, 40vmin); 
+            transform: translate(@rand(-200%, 200%), @rand(-60%, 60%)) scale(@rand(.8, 1.8)) skew(@rand(45deg)); 
+            clip-path: polygon( 
+                @r(0, 30%) @r(0, 50%), 
+                @r(30%, 60%) @r(0%, 30%), 
+                @r(50%, 80%) @r(0%, 50%), 
+                @r(50%, 80%) @r(40%, 60%), 
+                @r(30%, 60%) @r(30%, 10%),
+                @r(0, 30%) @r(30%, 10%)
+            ); 
+            background: @pick(#f44336, #e91e63, #9c27b0, #673ab7, #3f51b5, #60569e, #e6437d, #ebbf4d, #00bcd4, #03a9f4, #2196f3, #009688, #5ee463, #f8e645, #ffc107, #ff5722, #43f8bf); 
+            opacity: @rand(.5, .8); 
+        </css-doodle>
+    </div>
+    
+    <div id = "Chart"></div>
+    <div id="result"></div>
+    <div class="static">
+        <button class="btn" onclick="lastPage()">
+            Go Last !
+        </button>
+    </div>
+
+    
+
+    
+    
+    <script src = "https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/css-doodle@0.37.4/css-doodle.min.js"></script>
+    <script src="io.js"></script>
+    <script src = "main.js"></script>
+    <script src = "AgeDistribution.js"></script>
+    <script src = "GenderDistribution.js"></script>
+    <script src = "EducationDistribution.js"></script>
+    <script src = "HospitalDistribution.js"></script>
+    <script src = "compareFig.js"></script>
+    
+</body>
+</html>

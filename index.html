@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /*  */
+        body {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .container {
+            position: absolute;
+            top: 100px;
+            display: flex;
+            transform: translate(0%, 0%);
+            flex-direction: column;
+            z-index: 3; 
+        }
+
+        .right-box {
+            position: absolute;
+            top: 0px; left: 1300px;
+            height: 95vh;
+            display: flex;
+            transform: translate(0%, 0%);
+            flex-direction: column;
+            justify-content: space-around;
+            z-index: 3; 
+        }
+        .d3-tip {
+            line-height: 1;
+            padding: 6px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .paral-text {
+            cursor: pointer;
+        }
+        .doodle{
+            position: relative;
+            top: 0px; left: 0; bottom: 0; right: 0; 
+            z-index: 1; 
+        }
+
+        .doodle::after { 
+            position: absolute;
+            content: "";
+            top: 0px; left: 0; bottom: 0; right: 0; 
+            backdrop-filter: blur(200px); 
+            z-index: 1; 
+        } 
+
+        .chosen-attr{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 25vw;
+        }
+        /*  */
+        .btn {
+            align-self: flex-end ;
+        }
+        .btn,
+        .btn:hover,
+        .btn:focus {
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            width: 80px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: #c4e49f;
+            color: #1a1a1a;
+            font-size: 1rem;
+            transition: box-shadow 400ms cubic-bezier(0.2, 0, 0.7, 1), transform 200ms cubic-bezier(0.2, 0, 0.7, 1);
+        }
+        .btn:hover {
+            transform: rotate(45deg);
+            box-shadow: 0 0 1px 15px rgba(98, 169, 114, 0.4), 0 0 1px 30px rgba(186, 255, 199, 0.1), 0 0 1px 45px rgba(60, 138, 59, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/css-doodle@0.37.4/css-doodle.min.js"></script>
+    <!-- <script type="text/javascript" src="d3-tip.js"></script> -->
+    <!-- <button type="button" onclick=newPage()>我是按鈕</button> -->
+
+    <div class="doodle">
+        <css-doodle> 
+            :doodle { 
+                @grid: 1x50 / 100vmax; 
+                @size: 100vw 100vh;
+            } 
+            @place-cell: center; 
+            
+            width: @rand(20vmin, 50vmin); 
+            height: @rand(30vmin, 40vmin); 
+            transform: translate(@rand(-200%, 200%), @rand(-60%, 60%)) scale(@rand(.8, 1.8)) skew(@rand(45deg)); 
+            clip-path: polygon( 
+                @r(0, 30%) @r(0, 50%), 
+                @r(30%, 60%) @r(0%, 30%), 
+                @r(50%, 80%) @r(0%, 50%), 
+                @r(50%, 80%) @r(40%, 80%), 
+                @r(30%, 60%) @r(30%, 10%),
+                @r(0, 30%) @r(30%, 10%)
+            ); 
+            background: @pick(#f44336, #e91e63, #9c27b0, #673ab7, #3f51b5, #60569e, #e6437d, #ebbf4d, #00bcd4, #03a9f4, #2196f3, #009688, #5ee463, #f8e645, #ffc107, #ff5722, #43f8bf); 
+            opacity: @rand(.5, .8); 
+        </css-doodle>
+    </div>
+    
+    <div class="container">
+        <div id="paral-co1"></div>
+        <div id="paral-co2"></div>
+    </div>
+
+    
+    <div class="right-box">
+        <div class="tips">
+            <p>tip1: double click can make figure sorted by regression</p>
+            <p>tip2: click can choose an attribute, you can have only 1 for each at least</p>
+        </div>
+        <div class="chosen-attr">
+            <div class="cdr_content">
+                <h3>the Attribute you selected</h3>
+                <div class="cdr_attr"></div>
+            </div>
+            <div class="mmse_content">
+                <h3>the Attribute you selected</h3>
+                <div class="mmse_attr"></div>
+            </div>
+        </div>
+        <div class="static">
+            <button class="btn" onclick="newPage()">
+                Explore
+            </button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="io.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
